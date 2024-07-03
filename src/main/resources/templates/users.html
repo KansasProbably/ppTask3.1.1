@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Users</title>
+    <style>
+        table th, table td {
+            padding: 10px 5px;
+            font-family: "Bookman Old Style";
+            font-size: 15px;
+            border-style: solid;
+            border-width: 2px;
+            background: #e28eff;
+        }
+        button {
+            padding: 5px;
+            background-color: #6d9aff;
+        }
+        .buttonDelete {
+            background: #4bff77;
+            color: white;
+        }
+        .buttonEdit {
+            background: #ff6f56;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+    </style>
+</head>
+<body>
+<div align ="center">
+<h1>Users</h1>
+<button onclick="window.location.href = '/new';">Add new user</button>
+<br>
+<br>
+<table border="1">
+    <tr>
+        <th th:width="70">UserId</th>
+        <th th:width="140">Name</th>
+        <th th:width="140">Surname</th>
+        <th th:width="70">Age</th>
+        <th th:width="180">Email</th>
+        <th th:width="70">Edit</th>
+        <th th:width="70">Delete</th>
+    </tr>
+    <tr th:each="users : ${users}">
+
+        <td><a th:href="@{'/' + ${users.userId}}" th:utext="${users.userId}">UserId</a></td>-->
+        <td th:utext="${users.name}">Name</td>
+        <td th:utext="${users.surname}">Surname</td>
+        <td th:utext="${users.age}">Age</td>
+        <td th:utext="${users.email}">Email</td>
+        <td>
+            <form th:action="@{'edit'}">
+                <button type="submit" th:name="id" th:value="${users.userId}">Edit</button>
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{'delete?id=' + ${users.userId}}">
+                <input type="submit" class="buttonDelete" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
